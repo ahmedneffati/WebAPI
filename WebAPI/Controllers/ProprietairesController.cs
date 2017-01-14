@@ -39,7 +39,7 @@ namespace WebAPI.Controllers
         
         [ResponseType(typeof(void))]
         public IHttpActionResult PutProprietaire(string id, Proprietaire proprietaire)
-        {
+        {   
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
