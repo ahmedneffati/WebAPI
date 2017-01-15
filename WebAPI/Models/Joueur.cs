@@ -11,11 +11,11 @@ namespace WebAPI.Models
         [Key]
         public string Email { get; set; }
 
-        public int MotDePass { get; set; }
+        public string MotDePass { get; set; }
         public string NomEtPrenom { get; set; }
         public string NumTel { get; set; }
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime Date { get; set; }
+        public DateTime DateDeNaiss { get; set; }
         public ICollection<Match> MatchOrganiser{ get; set; }
         public ICollection<MatchJoueur> MatchsParticiper { get; set; }
         public ICollection<Reservation> Reservations { get; set; }

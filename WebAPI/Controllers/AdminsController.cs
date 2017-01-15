@@ -24,7 +24,7 @@ namespace WebAPI.Controllers
 
         // GET: api/Admins/5
         [ResponseType(typeof(Admin))]
-        public IHttpActionResult GetAdmin(int id)
+        public IHttpActionResult GetAdmin(string id)
         {
             Admin admin = db.Admins.Find(id);
             if (admin == null)
@@ -37,14 +37,14 @@ namespace WebAPI.Controllers
 
         // PUT: api/Admins/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutAdmin(int id, Admin admin)
+        public IHttpActionResult PutAdmin(string id, Admin admin)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != admin.ID)
+            if (id != admin.Email)
             {
                 return BadRequest();
             }
@@ -80,14 +80,29 @@ namespace WebAPI.Controllers
             }
 
             db.Admins.Add(admin);
-            db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = admin.ID }, admin);
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if (AdminExists(admin.Email))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtRoute("DefaultApi", new { id = admin.Email }, admin);
         }
 
         // DELETE: api/Admins/5
         [ResponseType(typeof(Admin))]
-        public IHttpActionResult DeleteAdmin(int id)
+        public IHttpActionResult DeleteAdmin(string id)
         {
             Admin admin = db.Admins.Find(id);
             if (admin == null)
@@ -110,9 +125,9 @@ namespace WebAPI.Controllers
             base.Dispose(disposing);
         }
 
-        private bool AdminExists(int id)
+        private bool AdminExists(string id)
         {
-            return db.Admins.Count(e => e.ID == id) > 0;
+            return db.Admins.Count(e => e.Email == id) > 0;
         }
     }
 }

@@ -36,10 +36,9 @@ namespace WebAPI.Controllers
         }
 
         // PUT: api/Proprietaires/5
-        
         [ResponseType(typeof(void))]
         public IHttpActionResult PutProprietaire(string id, Proprietaire proprietaire)
-        {   
+        {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -75,7 +74,6 @@ namespace WebAPI.Controllers
         [ResponseType(typeof(Proprietaire))]
         public IHttpActionResult PostProprietaire(Proprietaire proprietaire)
         {
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

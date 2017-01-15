@@ -8,6 +8,15 @@ namespace WebAPI.Migrations
         public override void Up()
         {
             CreateTable(
+                "dbo.Admins",
+                c => new
+                    {
+                        Email = c.String(nullable: false, maxLength: 128),
+                        MotDePass = c.String(),
+                    })
+                .PrimaryKey(t => t.Email);
+            
+            CreateTable(
                 "dbo.Horaires",
                 c => new
                     {
@@ -40,10 +49,10 @@ namespace WebAPI.Migrations
                 c => new
                     {
                         Email = c.String(nullable: false, maxLength: 128),
-                        MotDePass = c.Int(nullable: false),
+                        MotDePass = c.String(),
                         NomEtPrenom = c.String(),
                         NumTel = c.String(),
-                        Date = c.DateTime(nullable: false),
+                        DateDeNaiss = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Email);
             
@@ -83,14 +92,14 @@ namespace WebAPI.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         Longitude = c.Single(nullable: false),
                         Latitude = c.Single(nullable: false),
-                        Titre = c.String(),
+                        Nom = c.String(),
                         Description = c.String(),
                         PathImage = c.String(),
-                        Proprietaire_Email = c.String(maxLength: 128),
+                        EmailProp = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Proprietaires", t => t.Proprietaire_Email)
-                .Index(t => t.Proprietaire_Email);
+                .ForeignKey("dbo.Proprietaires", t => t.EmailProp)
+                .Index(t => t.EmailProp);
             
             CreateTable(
                 "dbo.Proprietaires",
@@ -107,14 +116,14 @@ namespace WebAPI.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.Terrains", "Proprietaire_Email", "dbo.Proprietaires");
             DropForeignKey("dbo.Reservations", "IdTerrain", "dbo.Terrains");
+            DropForeignKey("dbo.Terrains", "EmailProp", "dbo.Proprietaires");
             DropForeignKey("dbo.Reservations", "EmailJoueur", "dbo.Joueurs");
             DropForeignKey("dbo.Matches", "OrganisateurEmail", "dbo.Joueurs");
             DropForeignKey("dbo.MatchJoueurs", "MatchId", "dbo.Matches");
             DropForeignKey("dbo.MatchJoueurs", "JoueurEmail", "dbo.Joueurs");
             DropForeignKey("dbo.Reservations", "HoraireId", "dbo.Horaires");
-            DropIndex("dbo.Terrains", new[] { "Proprietaire_Email" });
+            DropIndex("dbo.Terrains", new[] { "EmailProp" });
             DropIndex("dbo.MatchJoueurs", new[] { "MatchId" });
             DropIndex("dbo.MatchJoueurs", new[] { "JoueurEmail" });
             DropIndex("dbo.Matches", new[] { "OrganisateurEmail" });
@@ -128,6 +137,7 @@ namespace WebAPI.Migrations
             DropTable("dbo.Joueurs");
             DropTable("dbo.Reservations");
             DropTable("dbo.Horaires");
+            DropTable("dbo.Admins");
         }
     }
 }
