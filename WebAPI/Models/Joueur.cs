@@ -14,7 +14,7 @@ namespace WebAPI.Models
         public string MotDePass { get; set; }
         public string NomEtPrenom { get; set; }
         public string NumTel { get; set; }
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DateDeNaiss { get; set; }
         public ICollection<Match> MatchOrganiser{ get; set; }
         public ICollection<MatchJoueur> MatchsParticiper { get; set; }

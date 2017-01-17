@@ -52,7 +52,7 @@ namespace WebAPI.Migrations
                         MotDePass = c.String(),
                         NomEtPrenom = c.String(),
                         NumTel = c.String(),
-                        DateDeNaiss = c.DateTime(nullable: false),
+                        DateDeNaiss = c.DateTime(nullable: true),
                     })
                 .PrimaryKey(t => t.Email);
             
