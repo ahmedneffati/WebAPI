@@ -21,7 +21,25 @@ namespace WebAPI.Controllers
         {
             return db.Joueurs;
         }
+        //http://takwira.azurewebsites.net/api/Joueurs/Connexion/neffatiahmed50@gmail.com/azerty
+        [Route("api/Joueurs/Connexion/{Email}/{pass}")]
+        [ResponseType(typeof(Joueur))]
 
+        public IHttpActionResult GetConnec(string Email, string pass)
+        {
+            try
+            {
+                Joueur joueur = db.Joueurs.Where(s => s.Email.Equals(Email) &&
+    s.MotDePass.Equals(pass)).ToList().First();
+                return Ok(joueur);
+            }
+            catch (Exception ex)
+            {
+                return NotFound();
+            }
+
+
+        }
         // GET: api/Joueurs/5
         [ResponseType(typeof(Joueur))]
         public IHttpActionResult GetJoueur(string id)

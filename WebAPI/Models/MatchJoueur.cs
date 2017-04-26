@@ -13,7 +13,7 @@ namespace WebAPI.Models
         //[Key, Column(Order = 0)]
         [ForeignKey("Joueur")]
         public string JoueurEmail { get; set; }
-       // [Key, Column(Order = 1)]//il fait partire de clé primaire 
+        //[Key, Column(Order = 1)]//il fait partire de clé primaire 
         [ForeignKey("Match")]
         public int MatchId { get; set; }
         public string EtatDeConfirmation { get; set; }

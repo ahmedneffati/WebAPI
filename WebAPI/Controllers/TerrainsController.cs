@@ -21,6 +21,54 @@ namespace WebAPI.Controllers
         {
             return db.Terrains;
         }
+        //http://localhost:49421/api/terrains/10.014/12.02/
+        [Route("api/Terrains/{latitude}/{longitude}")]
+        [HttpGet]
+        public List<Terrain> GetNearestTerrains(double longitude, double latitude )
+        {
+
+            List<Terrain> Terrains = new List<Terrain>();
+
+            foreach (Terrain t in db.Terrains.ToList())
+            {
+                double rlat1 = Math.PI * t.Latitude / 180;
+                double rlat2 = Math.PI * latitude / 180;
+                double theta = t.Longitude - longitude;
+                double rtheta = Math.PI * theta / 180;
+                double dist =
+                    Math.Sin(rlat1) * Math.Sin(rlat2) + Math.Cos(rlat1) *
+                    Math.Cos(rlat2) * Math.Cos(rtheta);
+                dist = Math.Acos(dist);
+                dist = dist * 180 / Math.PI;
+                dist = dist * 60 * 1.1515;
+                dist = dist * 1.609344;
+               if (dist < 10)
+                {
+                    Terrain terrain = new Terrain();
+                    terrain.Id = t.Id;
+                    terrain.Nom = t.Nom;
+                    terrain.Description = t.Description;
+                    terrain.Latitude = t.Latitude;
+                    terrain.Longitude = t.Longitude;
+                    terrain.PathImage = t.PathImage;
+                    terrain.EmailProp = t.EmailProp;
+
+                   Proprietaire p= db.Proprietaires.Find(t.EmailProp);
+                    if (p != null)
+                    {
+                        terrain.Proprietaire = new Proprietaire();
+                        terrain.Proprietaire.NumTel = p.NumTel;
+                        terrain.Proprietaire.Email = p.Email;
+                    }
+                    Terrains.Add(terrain);
+
+
+
+                }
+            }
+            return Terrains;
+        }
+
 
         // GET: api/Terrains/5
         [ResponseType(typeof(Terrain))]

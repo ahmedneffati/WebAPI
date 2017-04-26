@@ -15,7 +15,24 @@ namespace WebAPI.Controllers
     public class ProprietairesController : ApiController
     {
         private WebAPIContext db = new WebAPIContext();
+        [Route("api/Proprietaires/Connexion/{Email}/{pass}")]
+        [ResponseType(typeof(Joueur))]
 
+        public IHttpActionResult GetConnec(string Email, string pass)
+        {
+            try
+            {
+                Proprietaire joueur = db.Proprietaires.Where(s => s.Email.Equals(Email) &&
+    s.MotDePass.Equals(pass)).ToList().First();
+                return Ok(joueur);
+            }
+            catch (Exception ex)
+            {
+                return NotFound();
+            }
+
+
+        }
         // GET: api/Proprietaires
         public IQueryable<Proprietaire> GetProprietaires()
         {

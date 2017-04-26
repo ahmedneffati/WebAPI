@@ -35,6 +35,21 @@ namespace WebAPI.Controllers
             return Ok(reservation);
         }
 
+        [Route("api/GetReservationForTerrain/{id}")]
+        [HttpGet]
+        public IQueryable<Reservation> GetReservationForTerrain(int id)
+        {
+            IQueryable<Reservation> x = db.Reservations.Where(a => a.IdTerrain == id);
+            return x;
+        }
+        [Route("api/GetReservationForJoueur/{email}")]
+        [HttpGet]
+        public IQueryable<Reservation> GetReservationForJoueur(string email)
+        {
+            IQueryable<Reservation> x = db.Reservations.Where(a => a.EmailJoueur == email);
+            return x;
+        }
+
         // PUT: api/Reservations/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutReservation(int id, Reservation reservation)

@@ -52,7 +52,8 @@ namespace WebAPI.Migrations
                         MotDePass = c.String(),
                         NomEtPrenom = c.String(),
                         NumTel = c.String(),
-                        DateDeNaiss = c.DateTime(nullable: true),
+                        DateDeNaiss = c.DateTime(nullable: false),
+                        CompteActive = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Email);
             
@@ -62,6 +63,8 @@ namespace WebAPI.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Description = c.String(),
+                        Date = c.DateTime(nullable: false),
+                        NbDeJoueur = c.Int(nullable: false),
                         Longitude = c.Single(nullable: false),
                         Latitude = c.Single(nullable: false),
                         OrganisateurEmail = c.String(maxLength: 128),
@@ -109,6 +112,7 @@ namespace WebAPI.Migrations
                         MotDePass = c.String(),
                         NomEtPrenom = c.String(),
                         NumTel = c.String(),
+                        CompteActive = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Email);
             

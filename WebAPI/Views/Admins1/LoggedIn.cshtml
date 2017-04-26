@@ -1,0 +1,22 @@
+﻿@model WebAPI.Models.Admin
+
+@if (Session["AdminLogin"] != null)
+{
+    ViewBag.Title = "LoggedIn";
+
+    <h2>Bienvenu vous etes connectez par @Session["AdminLogin"]</h2>
+
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+
+
+}
+
+
+
+
+

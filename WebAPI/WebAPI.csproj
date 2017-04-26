@@ -181,21 +181,30 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\Admins1Controller.cs" />
     <Compile Include="Controllers\AdminsController.cs" />
+    <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Horaires1Controller.cs" />
     <Compile Include="Controllers\HorairesController.cs" />
+    <Compile Include="Controllers\Joueurs1Controller.cs" />
     <Compile Include="Controllers\JoueursController.cs" />
     <Compile Include="Controllers\MatchesController.cs" />
+    <Compile Include="Controllers\MatchJoueurs1Controller.cs" />
     <Compile Include="Controllers\MatchJoueursController.cs" />
+    <Compile Include="Controllers\MatchsController.cs" />
+    <Compile Include="Controllers\Proprietaires1Controller.cs" />
     <Compile Include="Controllers\ProprietairesController.cs" />
+    <Compile Include="Controllers\Reservations1Controller.cs" />
     <Compile Include="Controllers\ReservationsController.cs" />
+    <Compile Include="Controllers\Terrains1Controller.cs" />
     <Compile Include="Controllers\TerrainsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201701151314442_mig1.cs" />
-    <Compile Include="Migrations\201701151314442_mig1.Designer.cs">
-      <DependentUpon>201701151314442_mig1.cs</DependentUpon>
+    <Compile Include="Migrations\201702261844491_mig1.cs" />
+    <Compile Include="Migrations\201702261844491_mig1.Designer.cs">
+      <DependentUpon>201702261844491_mig1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
@@ -240,7 +249,10 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Properties\PublishProfiles\TAKWIRA - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\soccerField - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\soccerField - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\takwira - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\takwira - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -262,16 +274,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Proprietaires1\Create.cshtml" />
-    <Content Include="Views\Proprietaires1\Delete.cshtml" />
-    <Content Include="Views\Proprietaires1\Details.cshtml" />
-    <Content Include="Views\Proprietaires1\Edit.cshtml" />
-    <Content Include="Views\Proprietaires1\Index.cshtml" />
-    <Content Include="Views\Joueurs1\Create.cshtml" />
-    <Content Include="Views\Joueurs1\Delete.cshtml" />
-    <Content Include="Views\Joueurs1\Details.cshtml" />
-    <Content Include="Views\Joueurs1\Edit.cshtml" />
-    <Content Include="Views\Joueurs1\Index.cshtml" />
     <Content Include="Views\Reservations1\Create.cshtml" />
     <Content Include="Views\Reservations1\Delete.cshtml" />
     <Content Include="Views\Reservations1\Details.cshtml" />
@@ -297,6 +299,28 @@
     <Content Include="Views\MatchJoueurs1\Details.cshtml" />
     <Content Include="Views\MatchJoueurs1\Edit.cshtml" />
     <Content Include="Views\MatchJoueurs1\Index.cshtml" />
+    <Content Include="Views\Admins1\Create.cshtml" />
+    <Content Include="Views\Admins1\Delete.cshtml" />
+    <Content Include="Views\Admins1\Details.cshtml" />
+    <Content Include="Views\Admins1\Edit.cshtml" />
+    <Content Include="Views\Admins1\Index.cshtml" />
+    <Content Include="Views\Matches\Create.cshtml" />
+    <Content Include="Views\Matches\Delete.cshtml" />
+    <Content Include="Views\Matches\Details.cshtml" />
+    <Content Include="Views\Matches\Edit.cshtml" />
+    <Content Include="Views\Matches\Index.cshtml" />
+    <Content Include="Views\Joueurs1\Create.cshtml" />
+    <Content Include="Views\Joueurs1\Delete.cshtml" />
+    <Content Include="Views\Joueurs1\Details.cshtml" />
+    <Content Include="Views\Joueurs1\Edit.cshtml" />
+    <Content Include="Views\Joueurs1\Index.cshtml" />
+    <Content Include="Views\Proprietaires1\Create.cshtml" />
+    <Content Include="Views\Proprietaires1\Delete.cshtml" />
+    <Content Include="Views\Proprietaires1\Details.cshtml" />
+    <Content Include="Views\Proprietaires1\Edit.cshtml" />
+    <Content Include="Views\Proprietaires1\Index.cshtml" />
+    <Content Include="Views\Admins1\Login.cshtml" />
+    <Content Include="Views\Admins1\LoggedIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -317,8 +341,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201701151314442_mig1.resx">
-      <DependentUpon>201701151314442_mig1.cs</DependentUpon>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201702261844491_mig1.resx">
+      <DependentUpon>201702261844491_mig1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

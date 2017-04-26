@@ -13,6 +13,7 @@ namespace WebAPI.Models
         public string MotDePass { get; set; }
         public string NomEtPrenom { get; set; }
         public string NumTel { get; set; }
+        public bool CompteActive { get; set; }
         public ICollection<Terrain> TerrainS { get; set; }
     }
 }

@@ -2,103 +2,122 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Description;
+using System.Web;
+using System.Web.Mvc;
 using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    public class MatchesController : ApiController
+    public class MatchesController : Controller
     {
         private WebAPIContext db = new WebAPIContext();
 
-        // GET: api/Matches
-        public IQueryable<Match> GetMatchs()
+        // GET: Matches
+        public ActionResult Index()
         {
-            return db.Matchs;
+            var matchs = db.Matchs.Include(m => m.Organisateur);
+            return View(matchs.ToList());
         }
 
-        // GET: api/Matches/5
-        [ResponseType(typeof(Match))]
-        public IHttpActionResult GetMatch(int id)
+        // GET: Matches/Details/5
+        public ActionResult Details(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             Match match = db.Matchs.Find(id);
             if (match == null)
             {
-                return NotFound();
+                return HttpNotFound();
             }
-
-            return Ok(match);
+            return View(match);
         }
 
-        // PUT: api/Matches/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutMatch(int id, Match match)
+        // GET: Matches/Create
+        public ActionResult Create()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            ViewBag.OrganisateurEmail = new SelectList(db.Joueurs, "Email", "MotDePass");
+            return View();
+        }
 
-            if (id != match.Id)
+        // POST: Matches/Create
+        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
+        // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,Description,Date,NbDeJoueur,Longitude,Latitude,OrganisateurEmail")] Match match)
+        {
+            if (ModelState.IsValid)
             {
-                return BadRequest();
-            }
-
-            db.Entry(match).State = EntityState.Modified;
-
-            try
-            {
+                db.Matchs.Add(match);
                 db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!MatchExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return RedirectToAction("Index");
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            ViewBag.OrganisateurEmail = new SelectList(db.Joueurs, "Email", "MotDePass", match.OrganisateurEmail);
+            return View(match);
         }
 
-        // POST: api/Matches
-        [ResponseType(typeof(Match))]
-        public IHttpActionResult PostMatch(Match match)
+        // GET: Matches/Edit/5
+        public ActionResult Edit(int? id)
         {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
-                return BadRequest(ModelState);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            db.Matchs.Add(match);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = match.Id }, match);
-        }
-
-        // DELETE: api/Matches/5
-        [ResponseType(typeof(Match))]
-        public IHttpActionResult DeleteMatch(int id)
-        {
             Match match = db.Matchs.Find(id);
             if (match == null)
             {
-                return NotFound();
+                return HttpNotFound();
             }
+            ViewBag.OrganisateurEmail = new SelectList(db.Joueurs, "Email", "MotDePass", match.OrganisateurEmail);
+            return View(match);
+        }
 
+        // POST: Matches/Edit/5
+        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
+        // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,Description,Date,NbDeJoueur,Longitude,Latitude,OrganisateurEmail")] Match match)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(match).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.OrganisateurEmail = new SelectList(db.Joueurs, "Email", "MotDePass", match.OrganisateurEmail);
+            return View(match);
+        }
+
+        // GET: Matches/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Match match = db.Matchs.Find(id);
+            if (match == null)
+            {
+                return HttpNotFound();
+            }
+            return View(match);
+        }
+
+        // POST: Matches/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Match match = db.Matchs.Find(id);
             db.Matchs.Remove(match);
             db.SaveChanges();
-
-            return Ok(match);
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
@@ -108,11 +127,6 @@ namespace WebAPI.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private bool MatchExists(int id)
-        {
-            return db.Matchs.Count(e => e.Id == id) > 0;
         }
     }
 }

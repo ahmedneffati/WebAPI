@@ -11,11 +11,11 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Joueur.NomEtPrenom)
+            @Html.DisplayNameFor(model => model.Joueur.MotDePass)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Joueur.NomEtPrenom)
+            @Html.DisplayFor(model => model.Joueur.MotDePass)
         </dd>
 
         <dt>
@@ -27,16 +27,16 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EstConf)
+            @Html.DisplayNameFor(model => model.EtatDeConfirmation)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EstConf)
+            @Html.DisplayFor(model => model.EtatDeConfirmation)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

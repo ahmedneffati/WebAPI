@@ -35,6 +35,20 @@ namespace WebAPI.Controllers
             return Ok(matchJoueur);
         }
 
+        [Route("api/GetJoueursForMatch/{id}")]
+        [HttpGet]
+        public IQueryable<MatchJoueur> GetJoueursForMatch(int id)
+        {
+            IQueryable<MatchJoueur> matchJoueur = db.MatchJoueurs.Where(a => a.MatchId == id);
+            return matchJoueur;
+        }
+        [Route("api/GetMatchForJoueur/{email}")]
+        [HttpGet]
+        public IQueryable<MatchJoueur> GetMatchForJoueur(string email)
+        {
+            IQueryable<MatchJoueur> matchJoueur = db.MatchJoueurs.Where(a => a.JoueurEmail == email);
+            return matchJoueur;
+        }
         // PUT: api/MatchJoueurs/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutMatchJoueur(int id, MatchJoueur matchJoueur)

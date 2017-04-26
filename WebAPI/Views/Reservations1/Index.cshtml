@@ -12,19 +12,19 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Horaire.intervalle)
+            @Html.DisplayNameFor(model => model.Horaire.Intervalle)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Joueur.NomEtPrenom)
+            @Html.DisplayNameFor(model => model.Joueur.Email)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Terrain.Titre)
+            @Html.DisplayNameFor(model => model.Terrain.Nom)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Date)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EstConfirmer)
+            @Html.DisplayNameFor(model => model.EtatDeConfirmation)
         </th>
         <th></th>
     </tr>
@@ -32,19 +32,19 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Horaire.intervalle)
+            @Html.DisplayFor(modelItem => item.Horaire.Intervalle)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Joueur.NomEtPrenom)
+            @Html.DisplayFor(modelItem => item.Joueur.Email)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Terrain.Titre)
+            @Html.DisplayFor(modelItem => item.Terrain.Nom)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Date)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EstConfirmer)
+            @Html.DisplayFor(modelItem => item.EtatDeConfirmation)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

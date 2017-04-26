@@ -10,6 +10,8 @@ namespace WebAPI.Models
     {
         public int Id { get; set; }
         public string Description { get; set; }
+        public DateTime Date { get; set; }
+        public int NbDeJoueur { get; set; }
         public float Longitude { get; set; }
         public float Latitude { get; set; }
         public Joueur Organisateur { get; set; }

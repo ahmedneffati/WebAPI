@@ -22,6 +22,7 @@ namespace WebAPI.Controllers
             return db.Admins;
         }
 
+
         // GET: api/Admins/5
         [ResponseType(typeof(Admin))]
         public IHttpActionResult GetAdmin(string id)
@@ -35,6 +36,24 @@ namespace WebAPI.Controllers
             return Ok(admin);
         }
 
+        //http://localhost:49421/api/Admins/Connexion/zadazdf@zefze50.com/qfqzfqzfqzfd
+        [Route("api/Admins/Connexion/{Email}/{pass}")]
+        [ResponseType(typeof(Joueur))]
+
+        public IHttpActionResult GetConnec(string Email, string pass)
+        {
+            try
+            {
+                Admin admin  = db.Admins.Where(s => s.Email.Equals(Email) &&
+    s.MotDePass.Equals(pass)).ToList().First();
+                return Ok(admin);
+            }
+            catch (Exception ex)
+            {
+                return NotFound();
+            }
+
+        }
         // PUT: api/Admins/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutAdmin(string id, Admin admin)

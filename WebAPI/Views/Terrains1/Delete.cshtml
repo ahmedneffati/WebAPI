@@ -12,6 +12,14 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.Proprietaire.MotDePass)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Proprietaire.MotDePass)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Longitude)
         </dt>
 
@@ -28,11 +36,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Titre)
+            @Html.DisplayNameFor(model => model.Nom)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Titre)
+            @Html.DisplayFor(model => model.Nom)
         </dd>
 
         <dt>
@@ -41,6 +49,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PathImage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PathImage)
         </dd>
 
     </dl>

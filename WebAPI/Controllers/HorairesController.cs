@@ -22,6 +22,20 @@ namespace WebAPI.Controllers
             return db.Horaires;
         }
 
+        public IQueryable<Horaire> GetHorairesD(int x)
+        {
+            var list = db.Reservations.Where(b => b.IdTerrain == x);
+           //nt[] l=new int();
+            int i= 0;
+            foreach (var ll in list)
+            {
+
+             //   l.add
+            }
+            return db.Horaires.Where(a=>a.Id != db.Reservations.Where(b=>b.IdTerrain==x).First().HoraireId);
+        }
+
+
         // GET: api/Horaires/5
         [ResponseType(typeof(Horaire))]
         public IHttpActionResult GetHoraire(int id)
